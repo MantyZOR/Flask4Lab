@@ -1,0 +1,11 @@
+<!-- templates/user_edit.html -->
+{% extends 'base.html' %}
+{% from 'macros/forms.html' import render_user_form %}
+
+{% block title %}Редактирование пользователя{% endblock %}
+
+{% block content %}
+<h1>Редактирование пользователя: {{ user.full_name() }}</h1>
+
+{{ render_user_form(form, url_for('views.user_edit', id=user.id), 'Сохранить', include_username=false, include_password=false) }}
+{% endblock %}

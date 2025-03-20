@@ -1,0 +1,40 @@
+<!-- templates/macros/forms.html -->
+{% macro render_field(field, label_class='col-sm-2', field_class='col-sm-10') %}
+    <div class="form-group row{% if field.errors %} has-error{% endif %}">
+        {{ field.label(class='col-form-label ' + label_class) }}
+        <div class="{{ field_class }}">
+            {{ field(class='form-control' + (' is-invalid' if field.errors else '')) }}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro render_user_form(form, action_url, submit_text='Сохранить', include_username=true, include_password=true) %}
+    <form method="POST" action="{{ action_url }}">
+        {{ form.hidden_tag() }}
+        
+        {% if include_username %}
+            {{ render_field(form.username) }}
+        {% endif %}
+        
+        {% if include_password %}
+            {{ render_field(form.password) }}
+        {% endif %}
+        
+        {{ render_field(form.last_name) }}
+        {{ render_field(form.first_name) }}
+        {{ render_field(form.middle_name) }}
+        {{ render_field(form.role) }}
+        
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">{{ submit_text }}</button>
+                <a href="{{ url_for('views.index') }}" class="btn btn-secondary">Отмена</a>
+            </div>
+        </div>
+    </form>
+{% endmacro %}
