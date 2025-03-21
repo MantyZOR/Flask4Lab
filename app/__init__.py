@@ -1,4 +1,3 @@
-# __init__.py
 from flask import Flask
 from flask_login import LoginManager
 from .models import db, User, Role

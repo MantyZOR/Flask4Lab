@@ -1,4 +1,3 @@
-// static/js/script.js
 // Функция для обработки подтверждения удаления пользователя
 function confirmDelete(id, name) {
     if (confirm('Вы уверены, что хотите удалить пользователя ' + name + '?')) {
